@@ -67,11 +67,16 @@ sudo cp target/student-management.war /opt/tomcat/webapps/student.war
 sudo /opt/tomcat/bin/startup.sh
 ```
 
-## Step 5 — Open it in a browser
+## Step 5: Verify Application Deployment
 
-```
-http://<server-ip>:8080/student/
-```
+After successfully deploying the Student Management System on your EC2 instance, open the application in your browser using the public DNS and port number:  
+
+`http://public-ip:8080/student/students`
+
+You should see the StudentHub dashboard displaying the list of students with options to Edit or Delete records.
+
+![StudentHub Dashboard](images/step5-studenthub.png)
+
 
 ## Troubleshooting
 
