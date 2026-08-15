@@ -1,0 +1,54 @@
+pipeline{
+    agent{
+        label 'worker'
+        }
+
+        environment {
+            my_aws_credentials = credentials('aws-access')
+        }
+
+        tools {
+            terraform 'terraform'
+        }
+
+    stages
+    {
+        stage ('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/GauriZombade/student-management-app.git'
+            }
+        }
+
+        stage ('Terraform -init'){
+            steps {
+                sh '''
+                terraform init
+                '''
+            }
+
+        }
+        stage ('Terrafom -validate'){
+            steps{
+                sh '''
+                terraform validate      
+                '''
+            }
+            
+        }
+        stage ('Terraform -plan'){
+            steps{
+                sh '''
+                terraform plan
+                '''
+            }
+        }
+        stage ('Terraform -apply'){
+            steps{
+                sh '''
+                terraform apply -auto-approve
+                '''
+            }
+        }
+
+    }
+}
