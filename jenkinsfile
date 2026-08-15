@@ -61,7 +61,7 @@ pipeline {
         stage('Deploy to kubernetes') {
             steps {
                sh '''
-                aws eks update-kubeconfig --name my-cluster --region eu-north-1
+                aws eks update-kubeconfig --name my-cluster-eks --region eu-north-1
                 kubectl apply -f k8s/deployment.yaml
                 kubectl apply -f k8s/service.yaml
                 kubectl get pods
