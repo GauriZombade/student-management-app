@@ -72,6 +72,22 @@ pipeline {
                 '''
             }
         }
+        stage('Deploy to kubernetes') {
+            steps {
+                sh '''
+                aws eks update-kubeconfig --name my-cluster-eks --region eu-north-1
+                kubectl apply -f k8s/deployment.yaml
+                kubectl apply -f k8s/service.yaml
+                kubectl get pods
+                kubectl get svc
+                sleep 30 
+                kubectl get pods
+                kubectl get svc -o wide
+                '''
+           
+               
+            }
+        }
     }
 
 }
