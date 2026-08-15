@@ -63,6 +63,15 @@ pipeline {
                 '''
             }
         }
+        stage('Push Image to ECR'){
+            steps {
+                sh '''
+                aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 673498377906.dkr.ecr.eu-north-1.amazonaws.com
+               docker tag student:latest 673498377906.dkr.ecr.eu-north-1.amazonaws.com/student:latest
+               docker push 673498377906.dkr.ecr.eu-north-1.amazonaws.com/student:latest
+                '''
+            }
+        }
     }
 
 }

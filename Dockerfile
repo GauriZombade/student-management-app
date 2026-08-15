@@ -1,5 +1,5 @@
 FROM maven:3.9-eclipse-temurin-21 AS builder
-COPY . /student-management
+COPY ./student-management
 WORKDIR /student-management
 RUN mvn clean package
 
