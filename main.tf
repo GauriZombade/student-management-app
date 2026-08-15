@@ -20,7 +20,7 @@ data "aws_vpc" "default" { // Fetch default VPC
 
 variable "cluster_name" { // Variable for cluster name
   type    = string
-  default = "my-cluster"
+  default = "my-cluster-eks"
 }
 
 data "aws_subnets" "default" { // Fetch  all subnets in the default VPC
@@ -74,7 +74,7 @@ resource "aws_iam_role_policy_attachment" "node_policies" { // Attach necessary 
 }
 
 resource "aws_eks_cluster" "mycluster" { // EKS Cluster resource
-  name     = my-cluster  // Cluster name
+  name     = var.cluster_name   // Cluster name
   role_arn = aws_iam_role.eks_cluster_role.arn // IAM role for the cluster
 
   vpc_config {
