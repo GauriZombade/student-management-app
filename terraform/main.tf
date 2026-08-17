@@ -7,6 +7,7 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.26.0"
     }
+
   }
 }
 
@@ -16,6 +17,7 @@ provider "aws" {
 
 data "aws_vpc" "default" { // Fetch default VPC
   default = true
+  
 }
 
 variable "cluster_name" { // Variable for cluster name
