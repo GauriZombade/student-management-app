@@ -1,35 +1,42 @@
 # 🎓 Student Management System
 
-> A modern web-based application for managing student records efficiently using **Java, MySQL, Maven, and Apache Tomcat**.
+A web-based **Student Management System** built with **Java, JSP, Servlets, and MySQL** and automated with a complete **DevOps CI/CD pipeline** using **Jenkins, Docker, SonarQube, Terraform, Amazon ECR, Amazon EKS, and Kubernetes**.
 
 ---
 
 ## ✨ Features
 
-* ➕ Add new student records
+* ➕ Add student records
 * ✏️ Update student information
-* ❌ Delete existing records
-* 📋 View all students in a centralized dashboard
+* ❌ Delete student records
+* 📋 View all students in a single dashboard
 * 🗄️ MySQL database integration
-* ⚡ Fast and lightweight application
+* 🐳 Containerized with Docker
+* ☸️ Kubernetes-based deployment
+* 🔄 Automated CI/CD pipeline using Jenkins
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-* **Backend:** Java (Servlets & JSP)
-* **Build Tool:** Maven
-* **Database:** MySQL
-* **Application Server:** Apache Tomcat
-* **Version Control:** Git & GitHub
+| Category                | Technology          |
+| ----------------------- | ------------------- |
+| Backend                 | Java, JSP, Servlets |
+| Database                | MySQL               |
+| Build Tool              | Maven               |
+| Containerization        | Docker              |
+| CI/CD                   | Jenkins             |
+| Code Analysis           | SonarQube           |
+| Container Registry      | Amazon ECR          |
+| Infrastructure          | Terraform           |
+| Container Orchestration | Kubernetes          |
+| Cloud Platform          | AWS                 |
 
 ---
 
-## 📋 Prerequisites
+## 🚀 Local Deployment
 
-Install the following dependencies before running the application.
-
-### Java JDK 21
+### Install Java
 
 ```bash
 sudo apt update
@@ -37,14 +44,14 @@ sudo apt install -y openjdk-21-jdk
 java --version
 ```
 
-### Maven
+### Install Maven
 
 ```bash
 sudo apt install -y maven
 mvn -version
 ```
 
-### MySQL Server
+### Install MySQL
 
 ```bash
 sudo apt install -y mysql-server
@@ -52,32 +59,19 @@ sudo systemctl start mysql
 sudo systemctl enable mysql
 ```
 
-### Apache Tomcat
-
-Download and install **Apache Tomcat 10 or 11**.
-
----
-
-## 🚀 Installation
-
-### 1. Clone the repository
-
-```bash
-git clone <repository-url>
-cd student-management-system
-```
-
-### 2. Create the database
+### Create the database
 
 ```bash
 mysql -u root -p < sql/schema.sql
 ```
 
-This command creates the `school_db` database and the `students` table.
+### Configure the database connection
 
-### 3. Configure the database connection
+Edit:
 
-Edit the `src/main/resources/db.properties` file.
+```text
+src/main/resources/db.properties
+```
 
 ```properties
 db.url=jdbc:mysql://localhost:3306/school_db?useSSL=false&serverTimezone=UTC
@@ -85,29 +79,77 @@ db.user=root
 db.password=YOUR_MYSQL_PASSWORD
 ```
 
-### 4. Build the project
+### Build the application
 
 ```bash
 mvn clean package
 ```
 
-The generated WAR file will be available at:
+---
 
-```text
-target/student-management.war
-```
+## 🐳 Docker Deployment
 
-### 5. Deploy the application
+### Build the Docker image
 
 ```bash
-sudo cp target/student-management.war /opt/tomcat/webapps/student.war
-sudo /opt/tomcat/bin/startup.sh
+docker build -t student-management .
 ```
 
-### 6. Access the application
+### Run the container
+
+```bash
+docker compose up -d
+```
+
+---
+
+## ☸️ Kubernetes Deployment
+
+Apply the Kubernetes manifests:
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+Check the resources:
+
+```bash
+kubectl get deployments
+kubectl get services
+kubectl get pods
+```
+
+---
+
+## 🔄 CI/CD Pipeline
 
 ```text
-http://YOUR_PUBLIC_IP:8080/student/students
+GitHub
+   │
+   ▼
+Jenkins
+   │
+   ▼
+Maven Build
+   │
+   ▼
+SonarQube Analysis
+   │
+   ▼
+Docker Build
+   │
+   ▼
+Amazon ECR
+   │
+   ▼
+Terraform
+   │
+   ▼
+Amazon EKS
+   │
+   ▼
+Kubernetes Deployment
 ```
 
 ---
@@ -115,30 +157,49 @@ http://YOUR_PUBLIC_IP:8080/student/students
 ## 📂 Project Structure
 
 ```text
-student-management-system
-├── src
+STUDENT-MANAGEMENT-APP
+├── k8s
+│   ├── deployment.yaml
+│   └── service.yaml
 ├── sql
-├── images
+│   └── schema.sql
+├── src
+├── terraform
+│   └── main.tf
+├── Dockerfile
+├── docker-compose.yaml
+├── Jenkinsfile
+├── Jenkinsfile-cluster
 ├── pom.xml
-└── README.md
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 🌐 Access the Application
+
+After deployment, open:
+
+```text
+http://YOUR_PUBLIC_IP:8080/student/students
 ```
 
 ---
 
 ## 🐞 Troubleshooting
 
-| Issue                 | Solution                                       |
-| --------------------- | ---------------------------------------------- |
-| 404 Error             | Verify the Tomcat deployment directory.        |
-| MySQL Driver Error    | Run `mvn dependency:tree`.                     |
-| Database Access Error | Check `db.properties` and rebuild the project. |
+| Issue                     | Solution                                    |
+| ------------------------- | ------------------------------------------- |
+| 404 Error                 | Verify the Tomcat deployment                |
+| Database Connection Error | Check `db.properties`                       |
+| Docker Build Error        | Verify the `Dockerfile`                     |
+| Kubernetes Error          | Verify the deployment and service manifests |
 
 ---
 
-## 🤝 Contributing
+## ⭐ Support
 
-Contributions are welcome. Feel free to fork the repository and submit a pull request.
+If you found this project useful, don't forget to give it a star.
 
----
-
-## ⭐ If you like this project, don't forget to star the repository!
+Built with ❤️ using Java, AWS, Docker, Jenkins, Terraform, and Kubernetes.
