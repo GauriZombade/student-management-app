@@ -1,40 +1,83 @@
-# Student Management System
+# 🎓 Student Management System
 
-## Prerequisites 
+> A modern web-based application for managing student records efficiently using **Java, MySQL, Maven, and Apache Tomcat**.
 
-1. **Java JDK 21**
-   ```bash
-   sudo apt update
-   sudo apt install -y openjdk-21-jdk
-   java --version
-   ```
+---
 
-2. **Maven**
-   ```bash
-   sudo apt install -y maven
-   mvn -version
-   ```
+## ✨ Features
 
-3. **MySQL Server**
-   ```bash
-   sudo apt install -y mysql-server
-   sudo systemctl start mysql
-   sudo systemctl enable mysql
-   ```
+* ➕ Add new student records
+* ✏️ Update student information
+* ❌ Delete existing records
+* 📋 View all students in a centralized dashboard
+* 🗄️ MySQL database integration
+* ⚡ Fast and lightweight application
 
-4. **Download Apache Tomcat 10 or 11**
+---
 
-## Step 1 — Create the database
+## 🛠️ Tech Stack
+
+* **Backend:** Java (Servlets & JSP)
+* **Build Tool:** Maven
+* **Database:** MySQL
+* **Application Server:** Apache Tomcat
+* **Version Control:** Git & GitHub
+
+---
+
+## 📋 Prerequisites
+
+Install the following dependencies before running the application.
+
+### Java JDK 21
+
+```bash
+sudo apt update
+sudo apt install -y openjdk-21-jdk
+java --version
+```
+
+### Maven
+
+```bash
+sudo apt install -y maven
+mvn -version
+```
+
+### MySQL Server
+
+```bash
+sudo apt install -y mysql-server
+sudo systemctl start mysql
+sudo systemctl enable mysql
+```
+
+### Apache Tomcat
+
+Download and install **Apache Tomcat 10 or 11**.
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd student-management-system
+```
+
+### 2. Create the database
 
 ```bash
 mysql -u root -p < sql/schema.sql
 ```
 
-This creates database `school_db` with a `students` table.
+This command creates the `school_db` database and the `students` table.
 
-## Step 2 — Configure the app's DB connection
+### 3. Configure the database connection
 
-Edit `src/main/resources/db.properties`:
+Edit the `src/main/resources/db.properties` file.
 
 ```properties
 db.url=jdbc:mysql://localhost:3306/school_db?useSSL=false&serverTimezone=UTC
@@ -42,50 +85,60 @@ db.user=root
 db.password=YOUR_MYSQL_PASSWORD
 ```
 
-## Step 3 — Build the WAR with Maven
-
-From the project root (where `pom.xml` lives):
+### 4. Build the project
 
 ```bash
 mvn clean package
 ```
 
-Maven will compile everything and produce:
+The generated WAR file will be available at:
 
-```
+```text
 target/student-management.war
 ```
 
-That single file is the whole application.
-
-## Step 4 — Deploy to Tomcat
-
-Copy the WAR into Tomcat's `webapps` folder, then start Tomcat:
+### 5. Deploy the application
 
 ```bash
 sudo cp target/student-management.war /opt/tomcat/webapps/student.war
 sudo /opt/tomcat/bin/startup.sh
 ```
 
-## Step 5: Verify Application Deployment
+### 6. Access the application
 
-After successfully deploying the Student Management System on your EC2 instance, open the application in your browser using the public DNS and port number:  
+```text
+http://YOUR_PUBLIC_IP:8080/student/students
+```
 
-`http://public-ip:8080/student/students`
+---
 
-You should see the StudentHub dashboard displaying the list of students with options to Edit or Delete records.
+## 📂 Project Structure
 
-![StudentHub Dashboard](images/step5-studenthub.png)
+```text
+student-management-system
+├── src
+├── sql
+├── images
+├── pom.xml
+└── README.md
+```
 
+---
 
-## Troubleshooting
+## 🐞 Troubleshooting
 
-- **404 at the URL**: check `sudo /opt/tomcat/bin/catalina.sh version` for
-  the port Tomcat is on, and confirm the WAR unpacked into
-  `/opt/tomcat/webapps/student-management/`.
-- **500 error / stack trace mentioning `com.mysql.cj.jdbc.Driver`**: make
-  sure `mysql-connector-j` was pulled by Maven (`mvn dependency:tree`) and
-  is present in `WEB-INF/lib/` inside the WAR.
-- **Access denied for user**: fix `db.user` / `db.password` in
-  `db.properties`, then `mvn clean package` again (properties are baked
-  into the WAR at build time).
+| Issue                 | Solution                                       |
+| --------------------- | ---------------------------------------------- |
+| 404 Error             | Verify the Tomcat deployment directory.        |
+| MySQL Driver Error    | Run `mvn dependency:tree`.                     |
+| Database Access Error | Check `db.properties` and rebuild the project. |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome. Feel free to fork the repository and submit a pull request.
+
+---
+
+## ⭐ If you like this project, don't forget to star the repository!
